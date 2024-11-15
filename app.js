@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const { Parser } = require('json2csv');
 const axios = require('axios');
@@ -6,11 +7,11 @@ const app = express();
 app.get('/download-suppressions', async (req, res) => {
     // Sample API response
     const response = await axios.get(
-        'https://api.postmarkapp.com/message-streams/broadcast/suppressions/dump',
+        process.env.API_URL,
         {
             headers: {
                 'Accept': 'application/json',
-                'X-Postmark-Server-Token': '534512d1-4b17-41b1-9bd7-6fe872ee0cb5'
+                'X-Postmark-Server-Token': process.env.POSTMARK_SERVER_TOKEN
             }
         }
     );
